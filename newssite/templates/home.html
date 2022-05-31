@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<!-- home page -->
+<header id = 'showcase'>
+  <div class="container">
+    <div class="showcase-container">
+      <div class="showcase-content">
+        {% for post_head in post_header %}
+        <div class="category category-sports">
+         {{ post_head.category }}
+        </div>
+        <h1>{{ post_head.title | slice:":50" }}...</h1>
+        <p>{{ post_head.body | slice:":100" }}...</p>
+        <a href="{% url 'article' post_head.pk %}" class="btn btn-primary">Read More</a>
+        {% endfor %}
+      </div> 
+    </div>
+  </div>
+</header>
+
+<section id="home-articles" class="py-2">
+  <div class="container">
+    <h2>Editors Picks</h2>
+    <div class="articles-container">
+
+    
+      {% for post in posts %}
+      <article class="card">   
+        {% if post.photo %}  
+        <img src="{{ post.photo.url }}" alt="photo">
+        {% endif %}
+        <div class="category category-tech">
+          {{post.category}}
+        </div>
+        <h3>
+          <a href="{% url 'article' post.pk %}">{{post.title}}.</a>
+        </h3>
+        <p>{{post.body}}.</p>
+      </article>
+      {% endfor %}
+      
+    </div>
+  </div>
+</section>
+<!-- home page end -->
+{% endblock %}

@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" media = 'screen and (max-width: 768px)' href="{% static 'css/mobile.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Staatliches&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+  <script src="https://kit.fontawesome.com/85a5fdd30e.js" async></script>
+
+  <title>{% block title %}NewsGrid | New Web Site {% endblock title %}</title>
+</head>
+<body>
+  <nav id="main-nav">
+    <div class="contain">
+      <img src="{% static 'img/logo.png' %}" alt="NewsMedia" class="logo">
+      <div class = 'social'>
+        <a href="http://facebook.com.br" target = 'blank'><i class="fab fa-facebook fa-2x"></i></a>
+        <a href="http://twitter.com.br" target = 'blank'><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="http://instagram.com.br" target = 'blank'><i class="fab fa-instagram fa-2x"></i></a>
+        <a href="http://youtube.com.br" target = 'blank'><i class="fab fa-youtube fa-2x"></i></a>
+      </div>
+      <ul>
+        <li><a href="{% url 'home' %}" >Home</a></li>
+        <li><a href="{% url 'about' %}" >About</a></li>
+
+        <li>
+          <aside id="categories" class="card">
+            <a href="/">Categories</a>
+            <ul class="list">
+              {%if cat_menu %}
+              {% for cat in cat_menu %}
+                <li><a href="/?category={{cat.pk}}" >{{ cat.name }}</a></li>
+              {% endfor %}
+              {% endif %}
+            </ul>
+          </aside>
+        </li>
+
+        <li class="nav-item dropdown">
+          <select name="" id="dropdown">
+            <option value="" >uz</option>
+            <option value="">en</option>
+            <option value="">ru</option>
+          </select>
+        </li>
+
+        <li>
+          <form class="searchform-inline" action="{% url 'searchbar' %}" method="GET">
+            {% csrf_token %}
+            <input class="searchform" type="search" name="search" placeholder="Search" aria-label="Search">
+            <button class="searchbtn" type="submit">Search</button>
+          </form>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+ {% block content %}
+
+ {% endblock %}
+  <!-- Footer qismi -->
+  <footer id = 'main-footer' class = 'py-2'>
+    <div class="container footer-container">
+      <div>
+        <img src="{% static 'img/logo_light.png' %}" alt="logo">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium quod ratione veniam sit harum excepturi sed quos dignissimos maxime consequatur.</p>
+      </div>
+      <div>
+        <h3>Email Newsletter</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <form>
+          <input type="email" placeholder="Email:" required>
+          <input type="submit" value="Subscribe" class = 'btn btn-primary'>
+        </form>
+      </div>
+      <div>
+        <h3>Site Links</h3>
+        <ul class = 'list'>
+          <li><a href="#">Help and Support</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Join our Club</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, provident.</p>
+        <a href="#" class="btn btn-secondary">Join Now</a>
+      </div>
+      <div>
+        <p>
+          Copyright NewsGrid &copy; 2019, All Rights reserved. 
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

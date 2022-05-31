@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section id="home-articles" class="py-2">
+  <div class="container">
+    <h2>Search Picks</h2>
+    <div class="articles-container">
+
+      {% if postssearch %}
+      {% for post in postssearch %}
+      <article class="card">   
+        {% if post.photo %}  
+        <img src="{{ post.photo.url }}" alt="photo">
+        {% endif %}
+        <div class="category category-tech">
+          {{post.category}}
+        </div>
+        <h3>
+          <a href="{% url 'article' post.pk %}">{{post.title}}.</a>
+        </h3>
+        <p>{{post.body}}.</p>
+      </article>
+      {% endfor %}
+      {% else %}
+      <h1>Your request is not data</h1>
+      <p>Please yana bir bor urinib koring! Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, necessitatibus?</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

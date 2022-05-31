@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}NewsGrid | Category {% endblock %}
+
+{% block content %}
+<header id = 'showcase'>
+  <div class="container">
+    <div class="showcase-container">
+      <div class="showcase-content">
+        <div class="category category-sports">
+          {{cat_post.category}}
+        </div>
+        <h1>{{cat_post.title}}</h1>
+        <p>{{cat_post.body|slice:"100"|safe}}</p>
+        <a href="#" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="home-articles" class="py-2">
+  <div class="container">
+    <h2>Editors Picks</h2>
+    <div class="articles-container">
+
+    
+      {% for cat_post in categoria %}
+      <article class="card">   
+        {% if cat_post.photo %}  
+        <img src="{{ cat_post.photo.url }}" alt="photo">
+        {% endif %}
+        <div class="category category-tech">
+          {{cat_post.category}}
+        </div>
+        <h3>
+          <a href="{% url 'article' cat_post.pk %}">{{cat_post.title}}.</a>
+        </h3>
+        <p>{{cat_post.body}}.</p>
+      </article>
+      {% endfor %}
+
+
+    </div>
+  </div>
+</section>
+{% endblock %}
